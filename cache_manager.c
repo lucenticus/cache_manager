@@ -48,7 +48,8 @@ int add_to_hash_tab(const char *name)
 
 int open_cache(const char *cache_dest)
 {
-    for (int i = 0; i < NHASH; i++) {
+    int i;
+    for (i = 0; i < NHASH; i++) {
         cache->cache_tab[i] = NULL;
     }
     if ((cache->index_file = fopen(cache_dest, "r+")) == NULL) {
@@ -87,8 +88,9 @@ int is_exist_in_cache( const char *name)
 
 int close_cache()
 {
+    int i;
     fclose(cache->index_file);
-    for (int i = 0; i < NHASH; i++) {
+    for (i = 0; i < NHASH; i++) {
         while (cache->cache_tab[i]) {
             struct hash_node *temp = cache->cache_tab[i];
             cache->cache_tab[i] = cache->cache_tab[i]->next;
